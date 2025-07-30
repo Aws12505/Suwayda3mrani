@@ -5,23 +5,23 @@
 
 @section('content')
 <!-- Story Header -->
-<section class="story-header py-4 bg-light">
-    <div class="container">
+<section class="story-header bg-white">
+    <div class="container bg-white">
         <div class="row">
             <div class="col-12">
-                <nav aria-label="breadcrumb" data-aos="fade-up">
+                {{-- <nav aria-label="breadcrumb" data-aos="fade-up">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item">
                             <a href="{{ route('home') }}" class="text-decoration-none">
-                                <i class="fas fa-home me-1"></i>{{ __('Home') }}
+                                <i class="fas fa-home me-1"></i>{{ trans_dynamic('nav.home', app()->getLocale()) }}
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('home') }}#stories" class="text-decoration-none">{{ __('Stories') }}</a>
+                            <a href="{{ route('stories.index') }}" class="text-decoration-none">{{ trans_dynamic('nav.stories', app()->getLocale()) }}</a>
                         </li>
                         <li class="breadcrumb-item active">{{ Str::limit($story->getTitle(app()->getLocale()), 30) }}</li>
                     </ol>
-                </nav>
+                </nav> --}}
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                              onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlIEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';">
                         <div class="story-badge-overlay">
                             <div class="story-category-badge">
-                                <i class="fas fa-heart me-2"></i>{{ __('Story of Hope') }}
+                                <i class="fas fa-heart me-2"></i>{{ trans_dynamic('section.stories_of_hope', app()->getLocale()) }}
                             </div>
                         </div>
                     </div>
@@ -55,11 +55,11 @@
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-clock text-brand me-2"></i>
-                            <span class="text-muted">{{ ceil(str_word_count(strip_tags($story->getContent(app()->getLocale()))) / 200) }} min read</span>
+                            <span class="text-muted">{{ ceil(str_word_count(strip_tags($story->getContent(app()->getLocale()))) / 200) }} {{ app()->getLocale() === 'en' ? 'min read' : 'دقيقة للقراءة' }}</span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-eye text-brand me-2"></i>
-                            <span class="text-muted">{{ rand(150, 500) }} views</span>
+                            <span class="text-muted">{{ rand(150, 500) }} {{ app()->getLocale() === 'en' ? ' Views ' : ' مشاهدة ' }}</span>
                         </div>
                     </div>
                 </div>
@@ -78,11 +78,11 @@
                     <!-- Story Actions -->
                     <div class="story-actions mt-5 pt-4 border-top">
                         <div class="d-flex flex-wrap justify-content-center gap-3">
-                            <a href="{{ route('home') }}#stories" class="btn btn-outline-primary">
-                                <i class="fas fa-arrow-left me-2"></i>{{ __('Back to Stories') }}
+                            <a href="{{ route('stories.index') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left me-2"></i>{{ trans_dynamic('nav.back_to_stories', app()->getLocale()) }}
                             </a>
                             <button class="btn btn-outline-secondary" onclick="shareStory()">
-                                <i class="fas fa-share-alt me-2"></i>{{ __('Share Story') }}
+                                <i class="fas fa-share-alt me-2"></i>{{ trans_dynamic('nav.share_story', app()->getLocale()) }}
                             </button>
                         </div>
                     </div>
@@ -98,8 +98,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-header text-center mb-4">
-                    <h4 class="section-title fw-bold mb-2" data-aos="fade-up">{{ __('More Stories') }}</h4>
-                    <p class="section-subtitle text-muted small mb-0" data-aos="fade-up" data-aos-delay="100">{{ __('Continue reading other inspiring stories') }}</p>
+                    <h4 class="section-title fw-bold mb-2" data-aos="fade-up">{{ trans_dynamic('section.more_stories', app()->getLocale()) }}</h4>
+                    <p class="section-subtitle text-muted small mb-0" data-aos="fade-up" data-aos-delay="100">{{ trans_dynamic('section.continue_reading', app()->getLocale()) }}</p>
                 </div>
             </div>
         </div>
@@ -149,11 +149,11 @@
                        "
                        onmouseover="this.style.backgroundColor='#267b15'"
                        onmouseout="this.style.backgroundColor='#2f9319'">
-                        <i class="fas fa-book-open"></i> {{ __('Read') }}
+                        <i class="fas fa-book-open"></i> {{ trans_dynamic('button.read_story', app()->getLocale()) }}
                     </a>
                     <small class="text-muted">
                         <i class="fas fa-clock me-1"></i>
-                        {{ ceil(str_word_count(strip_tags($relatedStory->getContent(app()->getLocale()))) / 200) }}m
+                        {{ ceil(str_word_count(strip_tags($relatedStory->getContent(app()->getLocale()))) / 200) }}{{ app()->getLocale() === 'en' ? ' m ' : ' د ' }}
                     </small>
                 </div>
             </div>
@@ -163,9 +163,9 @@
     <div class="col-12">
         <div class="text-center py-4">
             <i class="fas fa-book-open fa-2x text-muted mb-2"></i>
-            <h6 class="text-muted mb-1">{{ __('No more stories available') }}</h6>
-            <p class="text-muted small mb-3">{{ __('Check back soon for more inspiring stories') }}</p>
-            <a href="{{ route('home') }}#stories" 
+            <h6 class="text-muted mb-1">{{ trans_dynamic("section.no_more_stories_available", app()->getLocale()) }}</h6>
+            <p class="text-muted small mb-3">{{ trans_dynamic("section.check_back", app()->getLocale()) }}</p>
+            <a href="{{ route('stories.index') }}" 
                style="
                    background-color: #2f9319;
                    color: #fff;
@@ -180,7 +180,7 @@
                "
                onmouseover="this.style.backgroundColor='#267b15'"
                onmouseout="this.style.backgroundColor='#2f9319'">
-               {{ __('View All Stories') }}
+               {{ trans_dynamic('button.view_all_stories', app()->getLocale()) }}
             </a>
         </div>
     </div>
@@ -204,7 +204,7 @@ function shareStory() {
         // Fallback for browsers that don't support Web Share API
         const url = window.location.href;
         navigator.clipboard.writeText(url).then(() => {
-            alert('{{ __("Story link copied to clipboard!") }}');
+            alert('{{ trans_dynamic("section.link_copied", app()->getLocale()) }}');
         }).catch(() => {
             // Final fallback
             const dummy = document.createElement('textarea');
@@ -213,7 +213,7 @@ function shareStory() {
             dummy.select();
             document.execCommand('copy');
             document.body.removeChild(dummy);
-            alert('{{ __("Story link copied to clipboard!") }}');
+            alert('{{ trans_dynamic("section.link_copied", app()->getLocale()) }}');
         });
     }
 }

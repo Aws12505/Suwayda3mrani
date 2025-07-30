@@ -22,6 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/media', [MediaController::class, 'index'])->name('media');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/story/{id}', [StoryController::class, 'show'])->name('story.show');
+Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
 Route::get('/lang/{code}', [LanguageController::class, 'switch'])->name('lang.switch');
 Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [AdminAuthController::class, 'login']);
@@ -48,6 +49,7 @@ Route::resource('media', AdminMediaController::class)->parameters([
         ]);        
         // Stories Management
         Route::resource('stories', AdminStoryController::class);
+
         
         // Partners Management
         Route::resource('partners', PartnerController::class);

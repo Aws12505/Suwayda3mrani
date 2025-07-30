@@ -63,7 +63,7 @@
                 </div>
                 <div class="media-type-badge position-absolute top-0 end-0 m-2">
                     <span class="badge bg-danger">
-                        <i class="fas fa-video me-1"></i>{{ trans_dynamic('media.video', app()->getLocale()) }}
+                        <i class="fas fa-video m-1"></i>{{ trans_dynamic('media.video', app()->getLocale()) }}
                     </span>
                 </div>
             @else
@@ -75,7 +75,7 @@
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
                 <div class="media-type-badge position-absolute top-0 end-0 m-2">
                     <span class="badge bg-success">
-                        <i class="fas fa-image me-1"></i>{{ trans_dynamic('media.photo', app()->getLocale()) }}
+                        <i class="fas fa-image m-1"></i>{{ trans_dynamic('media.photo', app()->getLocale()) }}
                     </span>
                 </div>
             @endif
@@ -114,8 +114,13 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-white">
             <div class="modal-header border-bottom">
-                <h5 class="modal-title text-dark">Media Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                @if(app()->getLocale() === 'ar')
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title text-dark">Media Preview</h5>
+                @else
+                    <h5 class="modal-title text-dark">Media Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                @endif
             </div>
             <div class="modal-body p-0 bg-white" id="mediaPreviewContent">
                 <!-- Preview content will be loaded here -->
